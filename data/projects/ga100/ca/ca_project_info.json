@@ -1,0 +1,74 @@
+{
+	"revs": {
+		"revP4.0": {
+		},
+		"revP3.0": {
+		},
+		"revP2.0": {
+		}
+	},
+
+	"blocks": {
+		"nv_top": {
+			"type": "top"
+		},
+		"NV_gaa_s0": {
+			"type": "chiplet"
+		},
+		"NV_gaa_g0": {
+			"type": "chiplet"
+		}
+	},
+
+	"modes": {
+		"functional": {
+		},
+		"shift": {
+		},
+		"scan-debug": {
+		},
+		"capture": {
+		},
+		"ftm-capture": {
+		}
+	},
+
+	"netlist_types": {
+		"noscan": {
+		},
+		"feflat": {
+		},
+		"flat": {
+		},
+		"ipo": {
+		}
+	},
+
+	"checks": {
+		"CK1": {
+		},
+		"CK2": {
+		},
+		"CK3": {
+		}
+	},
+
+	"data": {
+		"revP4.0": {
+			"NV_gaa_s0": {
+				"noscan": {
+					"functional": {
+						"total_checks": 40,
+						"passed_checks": 20
+					}
+				},
+				"feflat": {
+					"functional": {
+						"total_checks": 40,
+						"passed_checks": 40
+					}
+				}
+			}
+		}
+	}
+}

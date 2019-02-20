@@ -1,0 +1,18 @@
+{
+	"revP4.0": {
+		"NV_gaa_s0": {
+			"noscan": {
+				"functional": {
+					"total_checks": 40,
+					"passed_checks": 20
+				}
+			},
+			"feflat": {
+				"functional": {
+					"total_checks": 40,
+					"passed_checks": 40
+				}
+			}
+		}
+	}
+}

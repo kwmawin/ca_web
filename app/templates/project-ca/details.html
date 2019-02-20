@@ -1,0 +1,16 @@
+{% extends "/project-ca/base.html" %}
+
+{% block content %}
+<div class="container" id="project-ca-details-header">
+  <div class="row">
+    <div class="col">
+      <p> Rev: {{rev}} </p>
+      <p> Block: {{block}} </p>
+      <p> Type: {{netlist_type}} </p>
+      <p> Mode: {{mode}} </p>
+    </div>
+  </div>
+</div>
+<hr>
+<!-- Checks view / Runs view -->
+{% endblock %}

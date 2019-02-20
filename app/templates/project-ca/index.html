@@ -1,0 +1,40 @@
+{% extends "/project-ca/base.html" %}
+
+{% block content %}
+<table class="table table-bordered table-hover">
+<thead></thead>
+{% for rev in ca_project_info["revs"].keys() %}
+  <tr><td colspan={{params.table_cols}} class="text-center"> <div class="pt-5 font-weight-bold">{{rev}}</div> </td></tr>
+  <thead>
+  <tr class="text-center">
+    <th>Block</th>
+    {% for netlist_type in ca_project_info["netlist_types"].keys() %}
+    <th>{{netlist_type}}</th>
+    {% endfor %}
+  </tr>
+  </thead>
+  <tbody>
+  {% for block in ca_project_info["blocks"].keys() %}
+    <tr>
+      <td class="text-center align-middle">{{block}}</td>
+      {% for netlist_type in ca_project_info["netlist_types"].keys() %}
+        <td>
+        {% for mode in ca_project_info["modes"].keys() %}
+          {% if (ca_project_data[rev][block][netlist_type][mode]["total_checks"] == "NA") or (ca_project_data[rev][block][netlist_type][mode]["passed_checks"] < ca_project_data[rev][block][netlist_type][mode]["total_checks"]) %}
+            <div> <a href="/ca-details/{{project}}/{{rev}}/{{block}}/{{netlist_type}}/{{mode}}" class="btn btn-danger mt-3" role="button"> {{mode}}:
+          {% else %}
+            <div> <a href="/ca-details/{{project}}/{{rev}}/{{block}}/{{netlist_type}}/{{mode}}" class="btn btn-success mt-3" role="button"> {{mode}}:
+          {% endif %}
+          {{ca_project_data[rev][block][netlist_type][mode]["passed_checks"]}}
+          /
+          {{ca_project_data[rev][block][netlist_type][mode]["total_checks"]}}
+          </a> </div>
+        {% endfor %}
+        </td>
+      {% endfor %}
+    </tr>
+  {% endfor %}
+  </tbody>
+{% endfor %}
+</table>
+{% endblock %}
