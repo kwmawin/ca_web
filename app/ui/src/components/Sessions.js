@@ -3,16 +3,25 @@ import Select from 'react-select';
 import PropTypes from 'prop-types';
 
 import * as api from '../api';
+import * as utils from '../utils';
 
 class Sessions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sessionsInfo: props.sessionsInfo
+      sessionsInfo: props.sessionsInfo,
+      ignores: {
+        MINCorners: true,
+        EMCorners: true,
+        MVCorners: true,
+        CMNONEModes: true,
+        partition: true,
+        hyperscale: true,
+        ILM: true,
+      }
     };
 
     this.submit = this.submit.bind(this);
-    this.arrayToOptions = this.arrayToOptions.bind(this);
   }
 
   componentDidMount() {
@@ -30,7 +39,8 @@ class Sessions extends React.Component {
       revs: revs,
       blocks: blocks,
       modes: modes,
-      corners: corners
+      corners: corners,
+      ignores: this.state.ignores
     })
       .then(data => {
         console.log(data);
@@ -41,10 +51,6 @@ class Sessions extends React.Component {
     // console.log(blocks);
     // console.log(modes);
     // console.log(corners);
-  }
-
-  arrayToOptions (array) {
-    return array.map(value=>({value:value, label:value}));
   }
 
   render() {
@@ -58,7 +64,7 @@ class Sessions extends React.Component {
                 defaultValue={[]}
                 isMulti
                 name="select-rev"
-                options={this.arrayToOptions(this.props.sessionsInfo.revs)}
+                options={utils.arrayToOptions(this.props.sessionsInfo.revs)}
                 className="basic-multi-select"
                 classNamePrefix="select"
                 ref="selectRev"
@@ -70,7 +76,7 @@ class Sessions extends React.Component {
                 defaultValue={[]}
                 isMulti
                 name="select-block"
-                options={this.arrayToOptions(this.props.sessionsInfo.blocks)}
+                options={utils.arrayToOptions(this.props.sessionsInfo.blocks)}
                 className="basic-multi-select"
                 classNamePrefix="select"
                 ref="selectBlock"
@@ -82,7 +88,7 @@ class Sessions extends React.Component {
                 defaultValue={[]}
                 isMulti
                 name="select-mode"
-                options={this.arrayToOptions(this.props.sessionsInfo.modes)}
+                options={utils.arrayToOptions(this.props.sessionsInfo.modes)}
                 className="basic-multi-select"
                 classNamePrefix="select"
                 ref="selectMode"
@@ -94,11 +100,79 @@ class Sessions extends React.Component {
                 defaultValue={[]}
                 isMulti
                 name="select-corner"
-                options={this.arrayToOptions(this.props.sessionsInfo.corners)}
+                options={utils.arrayToOptions(this.props.sessionsInfo.corners)}
                 className="basic-multi-select"
                 classNamePrefix="select"
                 ref="selectCorner"
               />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+            Ignore:
+              <label> 
+                <input
+                  name="ignoreMinCorners"
+                  type="checkbox"
+                  defaultChecked={this.state.ignores.MINCorners}
+                  className="checkbox"
+                />
+                MIN corners
+              </label>
+              <label> 
+                <input
+                  name="ignoreEMCorners"
+                  type="checkbox"
+                  defaultChecked={this.state.ignores.EMCorners}
+                  className="checkbox"
+                />
+                EM corners
+              </label>
+              <label> 
+                <input
+                  name="ignoreMVCorners"
+                  type="checkbox"
+                  defaultChecked={this.state.ignores.MVCorners}
+                  className="checkbox"
+                />
+                MV corners
+              </label>
+              <label> 
+                <input
+                  name="ignoreCMNONEModes"
+                  type="checkbox"
+                  defaultChecked={this.state.ignores.CMNONEModes}
+                  className="checkbox"
+                />
+                CMNONE modes
+              </label>
+              <label> 
+                <input
+                  name="ignorePartitions"
+                  type="checkbox"
+                  defaultChecked={this.state.ignores.partition}
+                  className="checkbox"
+                />
+                partitions
+              </label>
+              <label> 
+                <input
+                  name="ignoreHyperscale"
+                  type="checkbox"
+                  defaultChecked={this.state.ignores.hyperscale}
+                  className="checkbox"
+                />
+                hyperscale
+              </label>
+              <label> 
+                <input
+                  name="ignoreILM"
+                  type="checkbox"
+                  defaultChecked={this.state.ignores.ILM}
+                  className="checkbox"
+                />
+                ILM
+              </label>
             </div>
           </div>
           <div className="row">

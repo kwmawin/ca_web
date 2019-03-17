@@ -21,6 +21,7 @@ class App extends React.Component {
 
 		this.fetchData = this.fetchData.bind(this);
 		this.getNavbarBrand = this.getNavbarBrand.bind(this);
+		this.getNavbarOptions = this.getNavbarOptions.bind(this);
 		this.getContent = this.getContent.bind(this);
 	}
 
@@ -67,6 +68,31 @@ class App extends React.Component {
 		return 'Clock Auditor';
 	}
 
+	getNavbarOptions () {
+		if (this.props.page == 'projects') {
+			return {
+				'home': true,
+				'wiki': true
+			};
+		} else if (this.props.page == 'project') {
+			return {
+				'home': true,
+				'wiki': true
+			};
+		} else if (this.props.page == 'sessions') {
+			return {
+				'home': true,
+				'project': true,
+				'wiki': true
+			};
+		}
+
+		return {
+			'home': true,
+			'wiki': true
+		};
+	}
+
 	getContent () {
 		if (this.props.page == 'projects') {
 			return (
@@ -88,7 +114,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className='App'>
-			<Navbar brandText={this.getNavbarBrand()} />
+			<Navbar brandText={this.getNavbarBrand()} options={this.getNavbarOptions()} project={this.props.project} />
 			<div className='gap-for-navbar'> </div>
 			{this.getContent()}
 			</div>
