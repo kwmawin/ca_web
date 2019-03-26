@@ -4,26 +4,19 @@ from glob import glob
 from os import path
 
 from app.api import bp
+from app.CaMySQL import CaMySQL
 
 @bp.route('projects', methods=['GET'])
 def get_projects():
-	# Get all projects
-  projects = []
-  for dir in glob('./data/projects/*'):
-    project = path.basename(dir)
-    projects.append(project)
-  return jsonify(projects)
+	db = CaMySQL()
+	projects = db.get_projects()
+	return jsonify(projects)
 
 
 @bp.route('/sessions_info/<project>', methods=['GET'])
 def get_sessions_info(project):
-	# TODO: fake data for project
-	infos = {
-		'revs': ['revP5.0', 'revP4.0', 'revP3.0'],
-		'blocks': ['nv_top', 'NV_gaa_t0', 'NV_gaa_s0'],
-		'modes': ['std_max', 'std_min', 'shift_max'],
-		'corners': ['tt_105c_0p67v', 'ssg_0c_0p6v']
-	};
+	db = CaMySQL()
+	infos = db.get_sessions_info(project)
 	return jsonify(infos)
 
 

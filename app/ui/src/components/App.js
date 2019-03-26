@@ -11,12 +11,6 @@ class App extends React.Component {
 		super(props);
 		this.state = {
 			projects: [],
-			sessionsInfo: {
-				revs: [],
-				blocks: [],
-				modes: [],
-				corners: []
-			}
 		};
 
 		this.fetchData = this.fetchData.bind(this);
@@ -39,17 +33,6 @@ class App extends React.Component {
 			.then(projects => {
 				this.setState({
 					projects: projects
-				});
-			})
-			.catch(console.error);
-		}
-
-		// Fetch sessions info
-		if (this.props.page == 'sessions') {
-			api.getSessionsInfo()
-			.then(sessionsInfo => {
-				this.setState({
-					sessionsInfo: sessionsInfo
 				});
 			})
 			.catch(console.error);
@@ -104,7 +87,7 @@ class App extends React.Component {
 			);
 		} else if (this.props.page == 'sessions') {
 			return (
-				<Sessions project={this.props.project} sessionsInfo={this.state.sessionsInfo}/>
+				<Sessions project={this.props.project}/>
 			);
 		}
 
